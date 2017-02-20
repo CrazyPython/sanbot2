@@ -16,7 +16,10 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("model", help="the model to use")
 parser.add_argument("--passive",
-                    help="learn in TNB instead, not responding to messages. Will learn using specified model.",
+                    help="learn in TNB instead, not responding to messages. Will learn using specified model",
+                    action="store_true")
+parser.add_argument("--secondary",
+                    help="Run under the secondary account",
                     action="store_true")
 args = parser.parse_args()
 
@@ -25,6 +28,8 @@ botname = 'SanBot'
 
 logger = logging.getLogger(__name__)
 
+if parser.secondary:
+    botname = 'NamelessBot'
 
 def main():
     setup_logging()
@@ -55,7 +60,7 @@ def main():
 
     print("(You are now in room #%s on %s.)" % (room_id, host_id))
     if not args.passive:
-        room.send_message("SanBot restarted.")
+        room.send_message("{} restarted.".format(botname))
     while True:
         time.sleep(100)
     client.logout()
@@ -78,6 +83,7 @@ def on_message(message, client):
             except:
                 print(">> recovered from error")
             else:
+                if reply
                 try:
                     message.message.reply(reply.encode('ascii', 'replace'))
                 except UnicodeEncodeError:

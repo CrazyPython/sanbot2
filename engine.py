@@ -1,4 +1,3 @@
-
 class MarkovEngine(object):
     def __init__(self, corpus):
         raise NotImplementedError

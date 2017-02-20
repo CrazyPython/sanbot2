@@ -65,7 +65,10 @@ def on_message(message, client):
         except:
             print(">> recovered from error")
         else:
-            message.message.reply(reply)
+            try:
+                message.message.reply(reply)
+            except UnicodeEncodeError:
+                print(">> recovered from unicode encode error")
 
 
 def setup_logging():

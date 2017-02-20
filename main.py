@@ -8,6 +8,13 @@ from response import Response
 from utils import *
 
 
+class Corpus(object):
+    def __init__(self, corpus):
+       self.corpus = corpus
+    def reply(self, *args, **kwargs):
+       return Brain(self.corpus).reply(*args, **kwargs)
+
+
 class SanBot(object):
     default_feelings = [0, 1]
     swing_amount = 10  # a decimal fraction to multiply reactions by
@@ -22,10 +29,9 @@ class SanBot(object):
     no_replies_to_generate = 5  # *.5 = time spent computing per response
 
     def __init__(self, disabled=False, debug=False, corpus='news2'):
-        self.corpus = corpus
         self.feelings = self.default_feelings
         self.sid = SentimentIntensityAnalyzer()
-        self.brain = Brain(self.corpus)
+        self.brain = Corpus(corpus)
         self._disabled = disabled
         self.debug = debug
         self.command_map = {
@@ -56,9 +62,9 @@ class SanBot(object):
                                   * self.boredom_constant, self.swing_max)
 
         if scores['pos'] > self.positive_threshold or (scores['pos'] > self.positive_threshold_50 and coinflip()):
-            return choice(['Yay!', 'Thanks!', ':D'])
+            return choice(['Yay!', 'Thanks!', ':D', "You're so nice!"])
         elif scores['neg'] > self.negative_threshold or (scores['neg'] > self.negative_threshold_50 and coinflip()):
-            return choice([':(', 'Awww...', 'Why so mean?', "y u do dis ;_;", ";("])
+            return choice([':(', 'Awww...', 'Why so mean?', "y u do dis ;_;", ";(", "I'm a damn bot trying to live and that's how you treat me? Do you not have any sense of ethics?"])
 
     def return_data_string_sentiment(self):
         if self.feelings[1] > 15:
@@ -137,7 +143,6 @@ class SanBot(object):
     def check_is_asking_feeling(message):
         return message.lower() in ['!! feeling', 'How are you feeling?', "What's your mood?"]
 
-    @to_repsonse_obj
     def feeling(self, message=None):
         happiness = self.feelings[1] / 2
         boredom = self.feelings[0] / 2

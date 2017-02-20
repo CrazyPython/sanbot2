@@ -8,7 +8,7 @@ import random
 
 PORT_NUMBER = 8090
 
-brain = Brain("president")
+brain = Brain("adventure")
 
 def unescape(s):
     return urllib.unquote_plus(s.encode('utf-8'))

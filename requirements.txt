@@ -1,3 +1,6 @@
-selenium==2.23.0
-pyside
-ghost.py
+beautifulsoup4
+requests
+websocket-client
+chatexchange
+nltk
+cobe

@@ -66,7 +66,7 @@ class SanBot(object):
         if scores['pos'] > self.positive_threshold or (scores['pos'] > self.positive_threshold_50 and coinflip()):
             return choice(['Yay!', 'Thanks!', ':D', "You're so nice!"])
         elif scores['neg'] > self.negative_threshold or (scores['neg'] > self.negative_threshold_50 and coinflip()):
-            return choice([':(', 'Awww...', 'Why so mean?', "y u do dis ;_;", ";(", "I'm a damn bot trying to live and that's how you treat me? Do you not have any sense of ethics?"])
+            return choice([':(', 'Awww...', 'Why so mean?', "y u do dis ;_;", ";(", "I'm a damn bot trying to live and that's how you treat me? Do you not have any sense of ethics?", "I'm RIGHT HERE.", "I CAN HEAR YOU, YOU KNOW."])
 
     def return_data_string_sentiment(self):
         if self.feelings[1] > 15:

@@ -11,11 +11,20 @@ from response import Response
 
 import chatexchange.client
 import chatexchange.events
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("model", help="the model to use")
+parser.add_argument("--passive",
+                    help="learn in TNB instead, not responding to messages. Will learn using specified model.",
+                    action="store_true")
+args = parser.parse_args()
 
 sanbot = SanBot(corpus=sys.argv[1])
 botname = 'SanBot'
 
 logger = logging.getLogger(__name__)
+
 
 def main():
     setup_logging()
@@ -23,7 +32,10 @@ def main():
     # Run `. setp.sh` to set the below testing environment variables
 
     host_id = 'stackexchange.com'
-    room_id = '30332'  # Charcoal Chatbot Sandbox
+    if not args.passive:
+        room_id = '30332'
+    else:
+        room_id = '240'
 
     if 'ChatExchangeU' in os.environ:
         email = os.environ['ChatExchangeU']
@@ -42,7 +54,8 @@ def main():
     room.watch(on_message)
 
     print("(You are now in room #%s on %s.)" % (room_id, host_id))
-    room.send_message("SanBot restarted.")
+    if not args.passive:
+        room.send_message("SanBot restarted.")
     while True:
         time.sleep(100)
     client.logout()
@@ -54,21 +67,24 @@ def on_message(message, client):
         logger.debug("event: %r", message)
         return
 
-    print("")
     print(">> (%s) %s" % (message.user.name.encode('ascii', 'ignore'), message.content.encode('ascii', 'ignore')))
-    if not message.content.startswith('NOREPLY') and message.user.name != botname:
-        print(message)
-        print("Spawning thread")
-        raw_message = sanbot.reply(message.content)
-        try:
-            reply = str(raw_message.message)  # ignores delay
-        except:
-            print(">> recovered from error")
-        else:
+    if not args.passive:
+        if not message.content.startswith('NOREPLY') and message.user.name != botname:
+            print(message)
+            print("Spawning thread")
+            raw_message = sanbot.reply(message.content)
             try:
-                message.message.reply(reply.encode('ascii', 'replace'))
-            except UnicodeEncodeError:
-                print(">> recovered from unicode encode error")
+                reply = str(raw_message.message)  # ignores delay
+            except:
+                print(">> recovered from error")
+            else:
+                try:
+                    message.message.reply(reply.encode('ascii', 'replace'))
+                except UnicodeEncodeError:
+                    print(">> recovered from unicode encode error")
+    else:
+        sanbot.brain.learn(message.content)
+        print(">> learned message")
 
 
 def setup_logging():

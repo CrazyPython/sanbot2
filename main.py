@@ -13,6 +13,8 @@ class Corpus(object):
        self.corpus = corpus
     def reply(self, *args, **kwargs):
        return Brain(self.corpus).reply(*args, **kwargs)
+    def learn(self, *args, **kwargs):
+       return Brain(self.corpus).learn(*args, **kwargs)
 
 
 class SanBot(object):

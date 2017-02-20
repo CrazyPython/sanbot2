@@ -28,7 +28,7 @@ botname = 'SanBot'
 
 logger = logging.getLogger(__name__)
 
-if parser.secondary:
+if args.secondary:
     botname = 'NamelessBot'
 
 def main():

@@ -20,9 +20,9 @@ class SanBot(object):
     baseline_neutrality = 1.0
     boredom_constant = 2
     no_replies_to_generate = 5  # *.5 = time spent computing per response
-    corpus = 'news2'
 
-    def __init__(self, disabled=False, debug=False):
+    def __init__(self, disabled=False, debug=False, corpus='news2'):
+        self.corpus = corpus
         self.feelings = self.default_feelings
         self.sid = SentimentIntensityAnalyzer()
         self.brain = Brain(self.corpus)

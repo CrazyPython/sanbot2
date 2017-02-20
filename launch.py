@@ -83,7 +83,6 @@ def on_message(message, client):
             except:
                 print(">> recovered from error")
             else:
-                if reply
                 try:
                     message.message.reply(reply.encode('ascii', 'replace'))
                 except UnicodeEncodeError:

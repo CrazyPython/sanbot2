@@ -55,7 +55,7 @@ def on_message(message, client):
         return
 
     print("")
-    print(u">> (%s) %s" % (message.user.name, message.content))
+    print(">> (%s) %s" % (message.user.name.encode('ascii', 'remove'), message.content.encode('ascii', 'remove'))))
     if not message.content.startswith('NOREPLY') and message.user.name != botname:
         print(message)
         print("Spawning thread")

@@ -1,0 +1,19 @@
+2017-02-20 09:05:34,302: INFO: MainThread: Logging in.
+2017-02-20 09:05:37,519: INFO: MainThread: Logged in.
+2017-02-20 09:05:37,521: INFO: message_sender: Worker thread reporting for duty.
+2017-02-20 09:09:16,536: INFO: MainThread: Logging in.
+2017-02-20 09:09:19,314: INFO: MainThread: Logged in.
+2017-02-20 09:09:19,316: INFO: message_sender: Worker thread reporting for duty.
+2017-02-20 09:28:06,762: INFO: MainThread: Logging in.
+2017-02-20 09:28:09,642: INFO: MainThread: Logged in.
+2017-02-20 09:28:09,644: INFO: message_sender: Worker thread reporting for duty.
+2017-02-20 09:29:09,718: INFO: MainThread: Logging in.
+2017-02-20 09:29:12,446: INFO: MainThread: Logged in.
+2017-02-20 09:29:12,448: INFO: message_sender: Worker thread reporting for duty.
+2017-02-20 09:32:01,754: INFO: MainThread: Logging in.
+2017-02-20 09:32:04,336: INFO: MainThread: Logged in.
+2017-02-20 09:32:04,338: INFO: message_sender: Worker thread reporting for duty.
+2017-02-20 09:32:05,256: INFO: message_sender: Now serving customer 1, ('send', '30332', 'NamelessBot restarted.')
+2017-02-20 10:05:57,105: INFO: MainThread: Logging in.
+2017-02-20 10:05:59,842: INFO: MainThread: Logged in.
+2017-02-20 10:05:59,845: INFO: message_sender: Worker thread reporting for duty.
